@@ -22,4 +22,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sampleImage"
+        android:layout_below="@+id/testTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp" />
+
 </RelativeLayout>
