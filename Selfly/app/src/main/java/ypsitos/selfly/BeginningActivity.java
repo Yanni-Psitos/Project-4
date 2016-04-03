@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Config;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MulticastSocket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -93,6 +95,7 @@ public class BeginningActivity extends AppCompatActivity {
     public Bitmap bitmap;
     private Target loadtarget;
     Uri mUri;
+    File mFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,8 @@ public class BeginningActivity extends AppCompatActivity {
                             for (int i = 0; i < data.size(); i++) {
                                 mUrl = (data.get(i).getImages().getStandardResolution().getUrl());
                                 if (mUrl != null) {
-                                    mUri = Uri.parse(mUrl.toString());
+                                    imageDownload(BeginningActivity.this, mUrl, mUrl);
+                                    mUri=Uri.fromFile(mFile);
                                     uploadImage(mUri);
                                 }
                             }
@@ -306,6 +310,51 @@ public class BeginningActivity extends AppCompatActivity {
         }
 
         return message;
+    }
+
+    public void imageDownload(Context ctx, String url, String directUrl){
+        Picasso.with(ctx)
+                .load(directUrl)
+                .into(getTarget(url));
+    }
+
+    //target to save
+    private Target getTarget(final String url){
+        Target target = new Target(){
+
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        mFile = new File(Environment.getExternalStorageDirectory().getPath() + "/" + url);
+                        try {
+                            mFile.createNewFile();
+                            FileOutputStream ostream = new FileOutputStream(mFile);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
+                            ostream.flush();
+                            ostream.close();
+                        } catch (IOException e) {
+                            Log.e("IOException", e.getLocalizedMessage());
+                        }
+                    }
+                }).start();
+
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+        return target;
     }
 
 }
