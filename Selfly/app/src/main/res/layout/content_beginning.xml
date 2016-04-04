@@ -17,15 +17,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="SAMPLE TEST"
+        android:text="Sync Your Selfly"
         android:textSize="25dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF" />
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <ypsitos.selfly.FaceView
+    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sampleImage"
+        android:id="@+id/faceView"
         android:layout_below="@+id/testTv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="78dp" />
