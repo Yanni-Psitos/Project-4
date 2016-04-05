@@ -64,43 +64,46 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
-            FaceDetector detector = new FaceDetector.Builder(getApplicationContext())
-                    .setTrackingEnabled(false)
-                    .setLandmarkType(FaceDetector.ALL_LANDMARKS)
-                    .build();
-            Detector<Face> safeDetector = new SafeFaceDetector(detector);
-            Frame frame = new Frame.Builder().setBitmap(imageBitmap).build();
-            SparseArray<Face> faces = safeDetector.detect(frame);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+            Log.v("note", "note");
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                mImageView.setImageBitmap(imageBitmap);
+                FaceDetector detector = new FaceDetector.Builder(getApplicationContext())
+                        .setTrackingEnabled(false)
+                        .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                        .build();
+                Detector<Face> safeDetector = new SafeFaceDetector(detector);
+                Frame frame = new Frame.Builder().setBitmap(imageBitmap).build();
+                SparseArray<Face> faces = safeDetector.detect(frame);
 
-            if (!safeDetector.isOperational()) {
-                // Note: The first time that an app using face API is installed on a device, GMS will
-                // download a native library to the device in order to do detection.  Usually this
-                // completes before the app is run for the first time.  But if that download has not yet
-                // completed, then the above call will not detect any faces.
-                //
-                // isOperational() can be used to check if the required native library is currently
-                // available.  The detector will automatically become operational once the library
-                // download completes on device.
-                Log.w("", "Face detector dependencies are not yet available.");
+                if (!safeDetector.isOperational()) {
+                    // Note: The first time that an app using face API is installed on a device, GMS will
+                    // download a native library to the device in order to do detection.  Usually this
+                    // completes before the app is run for the first time.  But if that download has not yet
+                    // completed, then the above call will not detect any faces.
+                    //
+                    // isOperational() can be used to check if the required native library is currently
+                    // available.  The detector will automatically become operational once the library
+                    // download completes on device.
+                    Log.w("", "Face detector dependencies are not yet available.");
 
-                // Check for low storage.  If there is low storage, the native library will not be
-                // downloaded, so detection will not become operational.
-                IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
-                boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
+                    // Check for low storage.  If there is low storage, the native library will not be
+                    // downloaded, so detection will not become operational.
+                    IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
+                    boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
 
-                if (hasLowStorage) {
-                    Toast.makeText(CameraActivity.this, "Low Storage", Toast.LENGTH_LONG).show();
-                    Log.w("", "Low Storage");
+                    if (hasLowStorage) {
+                        Toast.makeText(CameraActivity.this, "Low Storage", Toast.LENGTH_LONG).show();
+                        Log.w("", "Low Storage");
+                    }
                 }
-            }
 
-            FaceView overlay = (FaceView) findViewById(R.id.faceView);
-            overlay.setContent(imageBitmap, faces);
-            safeDetector.release();
+                FaceView overlay = (FaceView) findViewById(R.id.faceView);
+                overlay.setContent(imageBitmap, faces);
+                safeDetector.release();
+            }
         }
     }
 
