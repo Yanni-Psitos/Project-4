@@ -17,18 +17,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Sync Your Selfly"
+        android:text="Sync My Selfly!"
         android:textSize="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="113dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ypsitos.selfly.FaceView
     android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/faceView"
-        android:layout_below="@+id/testTv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp" />
+        android:layout_above="@+id/testTv"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

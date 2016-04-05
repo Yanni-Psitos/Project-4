@@ -122,6 +122,9 @@ public class BeginningActivity extends AppCompatActivity {
                                 }
                             }
                         }
+                        Intent toCameraActivity = new Intent(BeginningActivity.this,CameraActivity.class);
+                        startActivity(toCameraActivity);
+                        Toast.makeText(BeginningActivity.this, "Selfies Analyzed!", Toast.LENGTH_SHORT).show();
                     }
 
                     public void onFailure(Call<InstagramAPIResults> results, Throwable t) {

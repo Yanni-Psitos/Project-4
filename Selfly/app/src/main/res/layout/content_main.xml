@@ -34,8 +34,8 @@
         android:textSize="45dp"
         android:layout_toRightOf="@+id/toGetStarted"
         android:layout_toEndOf="@+id/toGetStarted"
-        android:alpha="0"
-        />
+        android:alpha="75"
+        android:paddingTop="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_below="@+id/textViewS"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0"
+        android:alpha="75"
         />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_below="@+id/textViewE"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0"
+        android:alpha="75"
         />
 
     <TextView
@@ -73,7 +73,7 @@
         android:layout_below="@+id/textViewL"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0"
+        android:alpha="75"
         />
 
     <TextView
@@ -86,7 +86,7 @@
         android:layout_below="@+id/textViewF"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0"
+        android:alpha="75"
         />
 
     <TextView
@@ -99,7 +99,17 @@
         android:layout_below="@+id/textViewL2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0"
+        android:alpha="75"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="&quot;Put your best self forward.&quot;"
+        android:id="@+id/textView"
+        android:layout_below="@+id/textViewY"
+        android:layout_toRightOf="@+id/toGetStarted"
+        android:layout_toEndOf="@+id/toGetStarted" />
 
 </RelativeLayout>
