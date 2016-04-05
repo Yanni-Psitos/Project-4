@@ -15,6 +15,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -34,8 +35,12 @@ public class CameraActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView mImageView;
     FloatingActionButton mCameraFab;
+    FloatingActionButton mSaveFab;
     String mCurrentPhotoPath;
     CameraPermissions cameraPermissions = new CameraPermissions(CameraActivity.this);
+    File photoFile;
+    int mCount;
+    TextView mScoreTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,17 @@ public class CameraActivity extends AppCompatActivity {
 
 
         mImageView = (ImageView) findViewById(R.id.usersPhoto);
-        mCameraFab = (FloatingActionButton) findViewById(R.id.cameraFab);
+        mScoreTv = (TextView)findViewById(R.id.scoreTv);
 
-        ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(CameraActivity.this);
-        showCaseBuilder.setTarget(new ViewTarget(mCameraFab));
-        showCaseBuilder.setContentText("Time To Put Your Best Self Forward! Press The Camera Button And Smile! (:");
-        showCaseBuilder.build();
+        mCameraFab = (FloatingActionButton) findViewById(R.id.cameraFab);
+        mSaveFab = (FloatingActionButton)findViewById(R.id.addFab);
+
+        if(mCount < 1) {
+            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(CameraActivity.this);
+            showCaseBuilder.setTarget(new ViewTarget(mCameraFab));
+            showCaseBuilder.setContentText("Time To Put Your Best Self Forward! Press The Camera Button And Smile! (:");
+            showCaseBuilder.build();
+        }
 
         mCameraFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +78,7 @@ public class CameraActivity extends AppCompatActivity {
             Log.v("note", "note");
             if (resultCode == RESULT_OK) {
                 Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                mImageView.setImageBitmap(imageBitmap);
+                Bitmap imageBitmap = (Bitmap)extras.get("data");
                 FaceDetector detector = new FaceDetector.Builder(getApplicationContext())
                         .setTrackingEnabled(false)
                         .setLandmarkType(FaceDetector.ALL_LANDMARKS)
@@ -100,9 +109,22 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 }
 
-                FaceView overlay = (FaceView) findViewById(R.id.faceView);
+                FaceView overlay = (FaceView) findViewById(R.id.faceView2);
                 overlay.setContent(imageBitmap, faces);
                 safeDetector.release();
+                mCount++;
+                mScoreTv.setVisibility(View.VISIBLE);
+                mScoreTv.setText("You Are " + Math.random() + "% Yourselfly!");
+                mSaveFab.setVisibility(View.VISIBLE);
+                mSaveFab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        galleryAddPic();
+                        Toast.makeText(CameraActivity.this, "Saved To Gallery!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         }
     }
@@ -138,7 +160,7 @@ public class CameraActivity extends AppCompatActivity {
                 // Ensure that there's a camera activity to handle the intent
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     // Create the File where the photo should go
-                    File photoFile = null;
+                    photoFile = null;
                     try {
                         photoFile = createImageFile();
                     } catch (IOException ex) {
@@ -146,8 +168,8 @@ public class CameraActivity extends AppCompatActivity {
                     }
                     // Continue only if the File was successfully created
                     if (photoFile != null) {
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                Uri.fromFile(photoFile));
+//                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                                Uri.fromFile(photoFile));
                         startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
                     }
                 }

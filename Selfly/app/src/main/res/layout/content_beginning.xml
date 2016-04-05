@@ -30,6 +30,8 @@
         android:id="@+id/faceView"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/testTv"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+
+        />
 
 </RelativeLayout>
