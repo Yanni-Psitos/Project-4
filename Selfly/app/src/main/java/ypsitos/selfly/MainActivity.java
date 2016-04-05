@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         tvL2 = (TextView)findViewById(R.id.textViewL2);
         tvY = (TextView)findViewById(R.id.textViewY);
 
-        Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade);
+
+
 
 
         final InstagramApp mApp = new InstagramApp(this,
@@ -80,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         }else if(mApp.hasAccessToken()){
+
+            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(MainActivity.this);
+            showCaseBuilder.setTarget(new ViewTarget(fab));
+            showCaseBuilder.setContentTitle("WELCOME TO SELFLY!               Before We Get Started..");
+            showCaseBuilder.setContentText("Please Click And Login To Instagram To Allow Selfly To Access Your Photos!");
+            showCaseBuilder.build();
 
             Intent toBeginningActivity = new Intent(MainActivity.this, BeginningActivity.class);
             startActivity(toBeginningActivity);

@@ -15,15 +15,24 @@
     <TextView
         android:id="@+id/toGetStarted"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="40dp" />
     <TextView
         android:id="@+id/usernameTv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="40dp" />
     <TextView
         android:id="@+id/passwordTv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="40dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,11 +40,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="S"
         android:id="@+id/textViewS"
-        android:textSize="45dp"
-        android:layout_toRightOf="@+id/toGetStarted"
+        android:textSize="40dp"
         android:layout_toEndOf="@+id/toGetStarted"
         android:alpha="75"
-        android:paddingTop="25dp" />
+        android:paddingTop="86dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,12 +53,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="E"
         android:id="@+id/textViewE"
-        android:textSize="45dp"
+        android:textSize="40dp"
         android:layout_below="@+id/textViewS"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:alpha="75"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,12 +65,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="L"
         android:id="@+id/textViewL"
-        android:textSize="45dp"
+        android:textSize="40dp"
         android:layout_below="@+id/textViewE"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:alpha="75"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,12 +77,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="F"
         android:id="@+id/textViewF"
-        android:textSize="45dp"
+        android:textSize="40dp"
         android:layout_below="@+id/textViewL"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:alpha="75"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,12 +89,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="L"
         android:id="@+id/textViewL2"
-        android:textSize="45dp"
+        android:textSize="40dp"
         android:layout_below="@+id/textViewF"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:alpha="75"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,12 +101,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Y"
         android:id="@+id/textViewY"
-        android:textSize="45dp"
+        android:textSize="40dp"
         android:layout_below="@+id/textViewL2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:alpha="75"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
